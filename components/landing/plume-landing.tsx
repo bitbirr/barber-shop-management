@@ -289,8 +289,8 @@ export function BitBarberLanding() {
             <div className="relative overflow-hidden rounded-5xl bg-white px-6 py-14 text-center shadow-card ring-1 ring-sky-100 sm:px-12">
               <div className="ghost-blob pointer-events-none absolute -left-8 -top-10 size-36 rounded-full bg-sky-200/80" />
               <div className="ghost-blob-fast pointer-events-none absolute -right-6 -bottom-12 size-40 rounded-full bg-coral-300/60" />
-              <span className="relative mx-auto mb-5 grid size-14 place-items-center rounded-3xl bg-gradient-to-br from-sky-400 to-coral-400 text-white">
-                <iconify-icon icon="ph:scissors-fill" width="24" />
+              <span className="relative mx-auto mb-5 grid size-14 place-items-center overflow-hidden rounded-3xl shadow-soft ring-1 ring-sky-100">
+                <img src="/brand/logo-mark.png" alt="" className="size-14 object-cover" />
               </span>
               <h2 className="relative text-3xl font-900 tracking-tight text-ink-900 sm:text-4xl">
                 Priced in birr. Built for one-chair to chain.

@@ -67,8 +67,8 @@ export function SignInCard() {
             className="absolute bottom-28 right-16 text-white/35"
           />
           <div className="relative flex items-center gap-2">
-            <span className="grid size-10 place-items-center rounded-2xl bg-white text-sky-600">
-              <iconify-icon icon="ph:scissors-fill" width="20" />
+            <span className="grid size-10 place-items-center rounded-2xl bg-white text-sky-600 overflow-hidden">
+              <img src="/brand/logo-mark.png" alt="" width={40} height={40} className="size-10 object-cover" />
             </span>
             <span className="inline-flex items-center gap-1 rounded-full bg-white/15 px-2.5 py-1 text-[11px] font-800 uppercase tracking-[0.14em]">
               <iconify-icon icon="ph:lightning-fill" width="12" />

@@ -1,9 +1,10 @@
 "use client";
 
 import "iconify-icon";
+import Image from "next/image";
 import Link from "next/link";
 import { type ReactNode } from "react";
-import { BrandMark } from "@/components/landing/brand-mark";
+import { BrandMark, brandAssets } from "@/components/landing/brand-mark";
 
 type AuthScreenProps = {
   asideTitle: string;
@@ -38,9 +39,7 @@ export function AuthScreen({ asideTitle, asideBody, children }: AuthScreenProps)
               <div className="absolute -right-10 -top-10 size-36 rounded-full bg-white/15" />
               <iconify-icon icon="ph:cloud-fill" width="88" className="absolute bottom-16 right-4 text-white/25" />
               <div className="relative flex items-center gap-2">
-                <span className="grid size-10 place-items-center rounded-2xl bg-white text-sky-600">
-                  <iconify-icon icon="ph:scissors-fill" width="20" />
-                </span>
+                <Image src={brandAssets.mark} alt="" width={72} height={72} className="size-10 rounded-2xl object-cover shadow-soft ring-1 ring-white/30" />
                 <span className="inline-flex items-center gap-1 rounded-full bg-white/15 px-2.5 py-1 text-[11px] font-800 uppercase tracking-[0.14em]">
                   <iconify-icon icon="ph:sparkle-fill" width="12" />
                   Addis

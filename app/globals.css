@@ -87,6 +87,10 @@ input {
   --color-coral-500: #f43f5e;
   --color-coral-600: #e11d48;
   --color-gold-400: #f4c430;
+  --color-ethiopia-green: #078930;
+  --color-ethiopia-yellow: #fcdd09;
+  --color-ethiopia-red: #da121a;
+  --color-brand-gold: #c9a227;
   --shadow-soft: 0 24px 60px -22px rgba(56, 189, 248, 0.45);
   --shadow-card: 0 40px 90px -30px rgba(15, 32, 48, 0.3);
   --shadow-lift: 0 28px 50px -24px rgba(14, 165, 233, 0.28);

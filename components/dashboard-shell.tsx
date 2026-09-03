@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import {
@@ -32,6 +33,7 @@ import {
   X,
 } from "lucide-react";
 import { type ReactNode, useEffect, useRef, useState } from "react";
+import { brandAssets } from "@/components/landing/brand-mark";
 
 const navigationSections = [
   { label: "Workspace", items: [{ label: "Overview", icon: LayoutDashboard, href: "/dashboard" }] },
@@ -121,12 +123,10 @@ function Sidebar({
       >
         <div className={`flex h-20 items-center px-5 ${collapsed ? "justify-center px-0" : "justify-between"}`}>
           <a className="flex items-center gap-3 rounded-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-400" href="/dashboard" title="Bit-Barber System">
-            <span className="grid size-9 place-items-center rounded-2xl bg-gradient-to-br from-sky-400 to-coral-400 text-white shadow-soft">
-              <Sparkles aria-hidden="true" className="size-[18px]" strokeWidth={2.4} />
-            </span>
+            <Image src={brandAssets.mark} alt="" width={72} height={72} className="size-9 shrink-0 rounded-2xl object-cover shadow-soft ring-1 ring-white/15" />
             <span className={collapsed ? "hidden" : ""}>
               <span className="block text-[17px] font-semibold tracking-[-0.02em]">Bit-Barber</span>
-              <span className="block text-[10px] font-800 uppercase tracking-[0.16em] text-sky-200/70">Shop system</span>
+              <span className="block text-[10px] font-800 uppercase tracking-[0.16em] text-ethiopia-yellow/90">Shop system</span>
             </span>
           </a>
           <button

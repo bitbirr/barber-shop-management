@@ -21,6 +21,10 @@ const inter = Inter({
 export const metadata: Metadata = {
   title: "Bit-Barber System",
   description: "All-in-one SaaS for Ethiopian barber shops to run chairs, bookings, and the till.",
+  icons: {
+    icon: "/brand/logo-favicon.png",
+    apple: "/brand/logo-mark.png",
+  },
 };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
