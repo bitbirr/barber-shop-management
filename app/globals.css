@@ -77,6 +77,20 @@ input {
   --radius-2xl: calc(var(--radius) * 1.8);
   --radius-3xl: calc(var(--radius) * 2.2);
   --radius-4xl: calc(var(--radius) * 2.6);
+  --radius-5xl: 2.75rem;
+  --color-cloud: #f7fbff;
+  --color-ink-900: #0f2030;
+  --color-ink-700: #33485c;
+  --color-ink-500: #5b7184;
+  --color-coral-300: #fda4af;
+  --color-coral-400: #fb7185;
+  --color-coral-500: #f43f5e;
+  --color-coral-600: #e11d48;
+  --shadow-soft: 0 24px 60px -22px rgba(56, 189, 248, 0.45);
+  --shadow-card: 0 40px 90px -30px rgba(15, 32, 48, 0.3);
+  --shadow-lift: 0 28px 50px -24px rgba(14, 165, 233, 0.28);
+  --font-weight-800: 800;
+  --font-weight-900: 900;
 }
 
 :root {
@@ -234,4 +248,57 @@ input {
 
 .auth-error {
   color: var(--destructive);
+}
+
+.plume {
+  --font-sans: var(--font-nunito), ui-rounded, system-ui, sans-serif;
+  --radius-4xl: 2rem;
+  --radius-5xl: 2.75rem;
+  color: #0f2030;
+  background: #f7fbff;
+  font-family: var(--font-nunito), ui-rounded, system-ui, sans-serif;
+}
+
+.plume ::selection {
+  background: #bae6fd;
+  color: #0c4a6e;
+}
+
+.plume .dotgrid {
+  background-image: radial-gradient(rgba(14, 165, 233, 0.28) 1px, transparent 1px);
+  background-size: 22px 22px;
+}
+
+.plume .ghost-blob {
+  filter: blur(2px);
+  animation: plume-float 8s ease-in-out infinite;
+}
+
+.plume .ghost-blob-slow {
+  animation-duration: 9s;
+}
+
+.plume .ghost-blob-fast {
+  animation-duration: 6s;
+}
+
+@keyframes plume-float {
+  0%,
+  100% {
+    transform: translateY(0) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-14px) rotate(4deg);
+  }
+}
+
+.plume .prompt-card:nth-child(even) {
+  animation-delay: 0.8s;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .plume .ghost-blob,
+  .plume .prompt-card {
+    animation: none !important;
+  }
 }
