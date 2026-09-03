@@ -1,0 +1,5 @@
+import { SaaSPage } from "@/components/saas-page";
+
+export default function BillingPage() {
+  return <SaaSPage eyebrow="Plan & usage" title="Billing" description="Manage your subscription, usage, invoices, and payment methods." action="Manage plan" metrics={[{ label: "Current plan", value: "Scale", change: "Annual" }, { label: "Monthly spend", value: "$149", change: "0.0%" }, { label: "Seats used", value: "8 / 12", change: "4 open" }, { label: "Next invoice", value: "Oct 03", change: "30 days" }]} panelTitle="Recent invoices" panelDescription="Invoices and payment status for this workspace" rows={[{ name: "Invoice #1048", detail: "September 2026 · Scale annual", value: "$149.00", status: "Paid" }, { name: "Invoice #1036", detail: "August 2026 · Scale annual", value: "$149.00", status: "Paid" }, { name: "Invoice #1024", detail: "July 2026 · Scale annual", value: "$149.00", status: "Paid" }, { name: "Invoice #1012", detail: "June 2026 · Scale annual", value: "$149.00", status: "Paid" }]} />;
+}

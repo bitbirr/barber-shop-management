@@ -1,0 +1,1 @@
+Hi {{{USER_NAME}}}, your {{{APP_NAME}}} account is ready: {{{DASHBOARD_URL}}}

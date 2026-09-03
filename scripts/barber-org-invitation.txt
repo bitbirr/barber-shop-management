@@ -1,0 +1,1 @@
+{{{INVITER_NAME}}} invited you to {{{ORGANIZATION_NAME}}}. Accept: {{{ACTION_URL}}}
