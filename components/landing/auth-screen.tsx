@@ -39,11 +39,11 @@ export function AuthScreen({ asideTitle, asideBody, children }: AuthScreenProps)
               <iconify-icon icon="ph:cloud-fill" width="88" className="absolute bottom-16 right-4 text-white/25" />
               <div className="relative flex items-center gap-2">
                 <span className="grid size-10 place-items-center rounded-2xl bg-white text-sky-600">
-                  <iconify-icon icon="ph:feather-fill" width="20" />
+                  <iconify-icon icon="ph:scissors-fill" width="20" />
                 </span>
                 <span className="inline-flex items-center gap-1 rounded-full bg-white/15 px-2.5 py-1 text-[11px] font-800 uppercase tracking-[0.14em]">
                   <iconify-icon icon="ph:sparkle-fill" width="12" />
-                  beta
+                  Addis
                 </span>
               </div>
               <div className="relative mt-auto space-y-2 pb-2">

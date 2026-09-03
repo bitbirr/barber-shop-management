@@ -46,8 +46,8 @@ export function SignUpCard() {
 
   return (
     <AuthScreen
-      asideTitle="Your next screen is one sentence away."
-      asideBody="Create a canvas, then design in plain words."
+      asideTitle="Open the floor in minutes."
+      asideBody="Name the shop, add chairs, start taking ETB."
     >
       <div className="mb-1 flex items-baseline justify-between gap-3">
         <h1 className="text-3xl font-900 tracking-tight text-ink-900">Create account</h1>
@@ -65,10 +65,10 @@ export function SignUpCard() {
 
       <form onSubmit={onSubmit} className="grid gap-4">
         <AuthField label="Name" icon="ph:user-bold">
-          <input name="name" type="text" autoComplete="name" required placeholder="Jordan Blake" className={authInputClass} />
+          <input name="name" type="text" autoComplete="name" required placeholder="Dawit Bekele" className={authInputClass} />
         </AuthField>
         <AuthField label="Work email" icon="ph:envelope-simple-bold">
-          <input name="email" type="email" autoComplete="email" required placeholder="you@studio.com" className={authInputClass} />
+          <input name="email" type="email" autoComplete="email" required placeholder="you@shop.et" className={authInputClass} />
         </AuthField>
         <AuthField
           label="Password"
@@ -95,7 +95,7 @@ export function SignUpCard() {
         </AuthField>
         {error ? <p className="text-sm font-700 text-coral-600">{error}</p> : null}
         <button type="submit" disabled={pending} className={authButtonClass}>
-          {pending ? "Creating" : "Create your canvas"}
+          {pending ? "Creating" : "Open my shop"}
           <iconify-icon icon="ph:arrow-right-bold" width="16" className="transition-transform group-hover:translate-x-0.5" />
         </button>
       </form>

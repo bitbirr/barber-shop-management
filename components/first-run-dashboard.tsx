@@ -15,22 +15,22 @@ import {
 } from "lucide-react";
 
 const onboardingSteps = [
-  { title: "Create your workspace", description: "Name your workspace and choose a timezone.", complete: true },
-  { title: "Connect your first data source", description: "Sync revenue, customers, or booking data.", complete: false },
-  { title: "Invite your team", description: "Bring collaborators into the workspace.", complete: false },
-  { title: "Build your first report", description: "Turn connected data into a live dashboard.", complete: false },
+  { title: "Name your shop", description: "Addis timezone is already set. Confirm your floor name.", complete: true },
+  { title: "Connect Telebirr", description: "Take birr on the till without a paper notebook.", complete: false },
+  { title: "Invite barbers", description: "Give Yonas and Kidus their own chair calendars.", complete: false },
+  { title: "Open Saturday board", description: "Turn bookings into a live floor dashboard.", complete: false },
 ];
 
 const sampleMetrics = [
-  { label: "Monthly revenue", value: "$28,420", detail: "+12.8% vs last month", icon: CircleDollarSign },
-  { label: "Active customers", value: "846", detail: "+72 this month", icon: UsersRound },
-  { label: "Conversion rate", value: "8.4%", detail: "+1.2 percentage points", icon: BarChart3 },
+  { label: "Monthly till", value: "428,000 ETB", detail: "+12.8% vs last month", icon: CircleDollarSign },
+  { label: "Active regulars", value: "846", detail: "+72 this month", icon: UsersRound },
+  { label: "Chair fill rate", value: "78%", detail: "+4.2 percentage points", icon: BarChart3 },
 ];
 
 const connectors = [
-  { name: "Stripe", description: "Revenue and subscriptions", icon: CircleDollarSign, tone: "bg-violet-50 text-violet-700" },
-  { name: "Google Sheets", description: "Import operational data", icon: FileSpreadsheet, tone: "bg-sky-50 text-sky-700" },
-  { name: "PostgreSQL", description: "Sync your product database", icon: Database, tone: "bg-sky-50 text-sky-700" },
+  { name: "Telebirr", description: "Mobile money on the till", icon: CircleDollarSign, tone: "bg-violet-50 text-violet-700" },
+  { name: "CBE Birr", description: "Bank transfer checkout", icon: FileSpreadsheet, tone: "bg-sky-50 text-sky-700" },
+  { name: "WhatsApp", description: "Booking messages from clients", icon: Database, tone: "bg-sky-50 text-sky-700" },
 ];
 
 export function FirstRunDashboard() {
@@ -42,15 +42,15 @@ export function FirstRunDashboard() {
             <div className="mb-3 inline-flex items-center gap-2 rounded-full border border-sky-200 bg-sky-50 px-3 py-1 text-[11px] font-semibold text-sky-700 dark:border-sky-400/20 dark:bg-sky-400/10 dark:text-sky-300">
               <Sparkles aria-hidden="true" className="size-3.5" /> New workspace
             </div>
-            <h1 className="text-2xl font-semibold tracking-[-0.04em] text-slate-950 dark:text-white sm:text-[32px]">Welcome to Plume</h1>
-            <p className="mt-2 max-w-2xl text-sm leading-6 text-slate-500 dark:text-white/45">Connect a source to replace the sample preview with live insights from your business.</p>
+            <h1 className="text-2xl font-semibold tracking-[-0.04em] text-slate-950 dark:text-white sm:text-[32px]">Welcome to Bit-Barber</h1>
+            <p className="mt-2 max-w-2xl text-sm leading-6 text-slate-500 dark:text-white/45">Connect Telebirr and your chairs to replace the sample floor with live Ethiopian shop numbers.</p>
           </div>
           <div className="flex flex-col gap-2 sm:flex-row">
             <button className="inline-flex h-11 items-center justify-center gap-2 rounded-xl border border-slate-200 bg-white px-4 text-sm font-semibold text-slate-700 transition hover:bg-slate-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-600 dark:border-white/10 dark:bg-white/[0.04] dark:text-white/70 dark:hover:bg-white/[0.08]" type="button">
               <CloudUpload aria-hidden="true" className="size-4" /> Import CSV
             </button>
             <button className="inline-flex h-11 items-center justify-center gap-2 rounded-full bg-gradient-to-r from-sky-700 to-coral-600 px-4 text-sm font-900 text-white shadow-soft" type="button">
-              <PlugZap aria-hidden="true" className="size-4" /> Connect data source
+              <PlugZap aria-hidden="true" className="size-4" /> Connect Telebirr
             </button>
           </div>
         </header>

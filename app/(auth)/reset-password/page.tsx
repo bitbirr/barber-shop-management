@@ -35,7 +35,7 @@ export default function ResetPasswordPage() {
   }
 
   return (
-    <AuthScreen asideTitle="Pick a new password." asideBody="Make it long, then get back to your canvas.">
+    <AuthScreen asideTitle="Pick a new password." asideBody="Make it long, then get back to the chairs.">
       <h1 className="mb-6 text-3xl font-900 tracking-tight text-ink-900">Choose a new password</h1>
       <form onSubmit={onSubmit} className="grid gap-4">
         <AuthField label="New password" icon="ph:lock-simple-bold">

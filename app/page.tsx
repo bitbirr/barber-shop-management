@@ -1,15 +1,16 @@
 import { Suspense } from "react";
-import { PlumeLanding } from "@/components/landing/plume-landing";
+import { BitBarberLanding } from "@/components/landing/plume-landing";
 
 export const metadata = {
-  title: "Plume. Design what you're imagining",
-  description: "A friendly design agent that turns a sentence into a screen you can ship.",
+  title: "Bit-Barber System | All-in-one shop software for Ethiopia",
+  description:
+    "SaaS for Ethiopian barber shops. Book chairs, take ETB and Telebirr, run your floor from Addis to Hawassa.",
 };
 
 export default function Home() {
   return (
     <Suspense>
-      <PlumeLanding />
+      <BitBarberLanding />
     </Suspense>
   );
 }

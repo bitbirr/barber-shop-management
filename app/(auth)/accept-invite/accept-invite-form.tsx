@@ -28,7 +28,7 @@ export default function AcceptInviteForm() {
   }
 
   return (
-    <AuthScreen asideTitle="You are invited in." asideBody="Join the workspace and start shipping UI together.">
+    <AuthScreen asideTitle="You are invited in." asideBody="Join the shop workspace and run the floor together.">
       <h1 className="text-3xl font-900 tracking-tight text-ink-900">Join a workspace</h1>
       <p className="mt-3 mb-6 font-700 text-ink-500">Sign in with the invited email, then accept this invitation.</p>
       {error ? <p className="mb-4 text-sm font-700 text-coral-600">{error}</p> : null}

@@ -28,7 +28,7 @@ export default function ForgotPasswordPage() {
   }
 
   return (
-    <AuthScreen asideTitle="Forgot it? We have you." asideBody="We will send a reset link if that email is in Plume.">
+    <AuthScreen asideTitle="Forgot it? We have you." asideBody="We will send a reset link if that email is on Bit-Barber System.">
       <h1 className="text-3xl font-900 tracking-tight text-ink-900">Reset password</h1>
       {sent ? (
         <p className="mt-4 font-700 leading-relaxed text-ink-500">If that email exists, a reset link is on its way. Check your inbox, then come back to sign in.</p>
@@ -37,7 +37,7 @@ export default function ForgotPasswordPage() {
           <p className="mt-2 mb-6 font-700 text-ink-500">Enter your work email and we will send a reset link.</p>
           <form onSubmit={onSubmit} className="grid gap-4">
             <AuthField label="Work email" icon="ph:envelope-simple-bold">
-              <input name="email" type="email" autoComplete="email" required placeholder="you@studio.com" className={authInputClass} />
+              <input name="email" type="email" autoComplete="email" required placeholder="you@shop.et" className={authInputClass} />
             </AuthField>
             {error ? <p className="text-sm font-700 text-coral-600">{error}</p> : null}
             <button type="submit" disabled={pending} className={authButtonClass}>

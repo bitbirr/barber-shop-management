@@ -68,16 +68,16 @@ export function SignInCard() {
           />
           <div className="relative flex items-center gap-2">
             <span className="grid size-10 place-items-center rounded-2xl bg-white text-sky-600">
-              <iconify-icon icon="ph:feather-fill" width="20" />
+              <iconify-icon icon="ph:scissors-fill" width="20" />
             </span>
             <span className="inline-flex items-center gap-1 rounded-full bg-white/15 px-2.5 py-1 text-[11px] font-800 uppercase tracking-[0.14em]">
               <iconify-icon icon="ph:lightning-fill" width="12" />
-              beta
+              Addis
             </span>
           </div>
           <div className="relative mt-auto space-y-2 pb-2">
-            <p className="text-xl font-900 leading-snug">Build the front-end you&apos;ve been imagining.</p>
-            <p className="text-sm font-700 text-white/80">Idea to shippable UI, fast.</p>
+            <p className="text-xl font-900 leading-snug">Fill every chair this Saturday.</p>
+            <p className="text-sm font-700 text-white/80">Bit-Barber System for Ethiopian shops.</p>
           </div>
         </aside>
 
@@ -110,7 +110,7 @@ export function SignInCard() {
                   type="email"
                   autoComplete="email"
                   required
-                  placeholder="you@studio.com"
+                  placeholder="you@shop.et"
                   className="h-12 w-full rounded-2xl border-2 border-sky-100 bg-sky-50/60 pl-11 pr-4 font-700 text-ink-900 outline-none placeholder:text-ink-500/50 focus:border-sky-400 focus:ring-4 focus:ring-[rgba(56,189,248,0.18)]"
                 />
               </span>
@@ -192,7 +192,7 @@ export function SignInCard() {
       </div>
       <div className="absolute -bottom-4 left-4 inline-flex animate-[plume-float_7s_ease-in-out_infinite] items-center gap-2 rounded-full bg-white px-3 py-2 text-xs font-800 text-ink-700 shadow-card ring-1 ring-sky-100">
         <iconify-icon icon="ph:shield-check-fill" width="16" className="text-sky-500" />
-        SOC 2 secure / Your work stays yours
+        Telebirr + CBE Birr ready
       </div>
     </div>
   );

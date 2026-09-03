@@ -3,24 +3,24 @@ import { SaaSPage } from "@/components/saas-page";
 export default function PipelinePage() {
   return (
     <SaaSPage
-      action="Add opportunity"
-      description="Track every opportunity from first conversation to closed deal."
-      eyebrow="Sales workspace"
+      action="Add lead"
+      description="Track every shop from first WhatsApp to signed pack."
+      eyebrow="Growth"
       metrics={[
-        { label: "Open pipeline", value: "$184k", change: "14.2%" },
-        { label: "Qualified leads", value: "48", change: "8.6%" },
+        { label: "Open pipeline", value: "2.8M ETB", change: "14.2%" },
+        { label: "Qualified shops", value: "48", change: "8.6%" },
         { label: "Win rate", value: "31%", change: "3.4%" },
         { label: "Average cycle", value: "24d", change: "5.1%" },
       ]}
-      panelDescription="Opportunities that need attention this week"
+      panelDescription="Shops that need a call this week"
       panelTitle="Priority pipeline"
       rows={[
-        { name: "Aperture Labs", detail: "Proposal · closes Sep 12", value: "$42,000", status: "72% likely" },
-        { name: "Northstar Health", detail: "Discovery · closes Sep 18", value: "$31,500", status: "58% likely" },
-        { name: "Lumen Works", detail: "Negotiation · closes Sep 21", value: "$28,400", status: "81% likely" },
-        { name: "Frame Studio", detail: "Qualified · closes Oct 02", value: "$19,800", status: "46% likely" },
+        { name: "Bole Fade House 2", detail: "Proposal · closes Sep 12", value: "42,000 ETB", status: "72% likely" },
+        { name: "Piassa Lineup", detail: "Discovery · closes Sep 18", value: "31,500 ETB", status: "58% likely" },
+        { name: "Merkato Kings", detail: "Negotiation · closes Sep 21", value: "28,400 ETB", status: "81% likely" },
+        { name: "Hawassa Clip", detail: "Qualified · closes Oct 02", value: "19,800 ETB", status: "46% likely" },
       ]}
-      title="Sales pipeline"
+      title="Shop pipeline"
     />
   );
 }

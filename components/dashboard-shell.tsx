@@ -62,19 +62,19 @@ type CommandItem = {
 
 const commandItems: CommandItem[] = [
   ...navigation.map((item) => ({ id: `page-${item.label}`, label: item.label, detail: "Open workspace page", category: "Page" as const, href: item.href, icon: item.icon, keywords: `page navigation ${item.label}` })),
-  { id: "customer-aperture", label: "Aperture Labs", detail: "Enterprise account · 4 open contacts", category: "Customer", href: "/customers#aperture-labs", icon: ContactRound, keywords: "customer account enterprise aperture labs" },
-  { id: "customer-northstar", label: "Northstar Health", detail: "Growth account · last active today", category: "Customer", href: "/customers#northstar-health", icon: ContactRound, keywords: "customer account growth northstar health" },
-  { id: "customer-lumen", label: "Lumen Works", detail: "Mid-market account · 2 active deals", category: "Customer", href: "/customers#lumen-works", icon: ContactRound, keywords: "customer account mid market lumen works" },
+  { id: "customer-aperture", label: "Bole Fade House", detail: "Flagship shop · 4 open walk-ins", category: "Customer", href: "/customers#bole-fade-house", icon: ContactRound, keywords: "customer shop bole fade house addis" },
+  { id: "customer-northstar", label: "Piassa Lineup", detail: "Growth shop · last active today", category: "Customer", href: "/customers#piassa-lineup", icon: ContactRound, keywords: "customer shop piassa lineup addis" },
+  { id: "customer-lumen", label: "Merkato Kings", detail: "Busy floor · 2 memberships", category: "Customer", href: "/customers#merkato-kings", icon: ContactRound, keywords: "customer shop merkato kings" },
   { id: "report-revenue", label: "Monthly revenue report", detail: "Revenue, growth, and average ticket", category: "Report", href: "/analytics#revenue", icon: FileText, keywords: "report analytics monthly revenue growth" },
   { id: "report-pipeline", label: "Pipeline forecast", detail: "Weighted forecast by deal stage", category: "Report", href: "/pipeline#forecast", icon: FileText, keywords: "report pipeline forecast weighted sales" },
   { id: "report-retention", label: "Customer retention", detail: "Repeat rate and at-risk accounts", category: "Report", href: "/customers#retention", icon: FileText, keywords: "report customer retention repeat at risk" },
-  { id: "action-deal", label: "Created Lumen Works deal", detail: "Today at 10:42 · $28,400", category: "Recent action", href: "/deals", icon: History, keywords: "recent action created deal lumen works" },
-  { id: "action-contact", label: "Updated Northstar contact", detail: "Yesterday at 16:18 · Jamie Park", category: "Recent action", href: "/customers#northstar-health", icon: History, keywords: "recent action updated contact northstar" },
+  { id: "action-deal", label: "Opened Bole membership pack", detail: "Today at 10:42 · 28,400 ETB", category: "Recent action", href: "/deals", icon: History, keywords: "recent action membership bole" },
+  { id: "action-contact", label: "Updated Piassa walk-in", detail: "Yesterday at 16:18 · Hana Tesfaye", category: "Recent action", href: "/customers#piassa-lineup", icon: History, keywords: "recent action walk in piassa" },
   { id: "action-report", label: "Exported revenue report", detail: "Sep 1 at 09:12 · CSV", category: "Recent action", href: "/analytics#revenue", icon: History, keywords: "recent action exported revenue report csv" },
 ];
 
 const defaultRecentIds = ["report-pipeline", "customer-aperture", "report-revenue"];
-const recentSearchesKey = "plume-command-palette-recents";
+const recentSearchesKey = "bit-barber-command-palette-recents";
 
 const pageTabs: Record<string, string[]> = {
   dashboard: ["Overview", "Activity", "Reports"],
@@ -87,16 +87,16 @@ const pageTabs: Record<string, string[]> = {
 };
 
 const appointments = [
-  { time: "09:00", name: "Marcus Lee", service: "Skin fade + beard", barber: "James", duration: "55 min", status: "Checked in", initials: "ML", tone: "bg-sky-100 text-sky-700" },
-  { time: "10:15", name: "David Kim", service: "Classic haircut", barber: "Ethan", duration: "35 min", status: "Confirmed", initials: "DK", tone: "bg-violet-100 text-violet-700" },
-  { time: "11:00", name: "Andre Wilson", service: "Buzz cut", barber: "James", duration: "25 min", status: "Confirmed", initials: "AW", tone: "bg-amber-100 text-amber-700" },
-  { time: "12:30", name: "Noah Williams", service: "Full grooming", barber: "Malik", duration: "75 min", status: "Pending", initials: "NW", tone: "bg-rose-100 text-rose-700" },
+  { time: "09:00", name: "Dawit Mekonnen", service: "Skin fade + beard", barber: "Yonas", duration: "55 min", status: "Checked in", initials: "DM", tone: "bg-sky-100 text-sky-700" },
+  { time: "10:15", name: "Hana Tesfaye", service: "Classic haircut", barber: "Kidus", duration: "35 min", status: "Confirmed", initials: "HT", tone: "bg-violet-100 text-violet-700" },
+  { time: "11:00", name: "Abel Tadesse", service: "Buzz cut", barber: "Yonas", duration: "25 min", status: "Confirmed", initials: "AT", tone: "bg-amber-100 text-amber-700" },
+  { time: "12:30", name: "Nahom Wolde", service: "Full grooming", barber: "Meklit", duration: "75 min", status: "Pending", initials: "NW", tone: "bg-rose-100 text-rose-700" },
 ];
 
 const team = [
-  { name: "James Cole", role: "Senior barber", bookings: 6, initials: "JC", tone: "bg-sky-100 text-sky-700" },
-  { name: "Ethan Reed", role: "Barber", bookings: 4, initials: "ER", tone: "bg-blue-100 text-blue-700" },
-  { name: "Malik Jones", role: "Barber", bookings: 2, initials: "MJ", tone: "bg-orange-100 text-orange-700" },
+  { name: "Yonas Haile", role: "Senior barber", bookings: 6, initials: "YH", tone: "bg-sky-100 text-sky-700" },
+  { name: "Kidus Bekele", role: "Barber", bookings: 4, initials: "KB", tone: "bg-blue-100 text-blue-700" },
+  { name: "Meklit Assefa", role: "Barber", bookings: 2, initials: "MA", tone: "bg-orange-100 text-orange-700" },
 ];
 
 function Sidebar({
@@ -112,7 +112,7 @@ function Sidebar({
 }) {
   const pathname = usePathname();
   const [workspaceMenuOpen, setWorkspaceMenuOpen] = useState(false);
-  const [activeWorkspace, setActiveWorkspace] = useState("Plume Studio");
+  const [activeWorkspace, setActiveWorkspace] = useState("Bole Fade House");
   const [openSections, setOpenSections] = useState<Record<string, boolean>>({ Workspace: true, Sales: true, Insights: true, Manage: true });
 
   return (
@@ -120,13 +120,13 @@ function Sidebar({
         className={`plume-sidebar fixed inset-y-0 left-0 z-50 hidden flex-col border-r border-sky-100 bg-ink-900 text-white shadow-card transition-[width] duration-200 motion-reduce:transition-none lg:flex ${collapsed ? "w-[76px]" : "w-[240px]"}`}
       >
         <div className={`flex h-20 items-center px-5 ${collapsed ? "justify-center px-0" : "justify-between"}`}>
-          <a className="flex items-center gap-3 rounded-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-400" href="#" title="Plume analytics">
+          <a className="flex items-center gap-3 rounded-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-400" href="/dashboard" title="Bit-Barber System">
             <span className="grid size-9 place-items-center rounded-2xl bg-gradient-to-br from-sky-400 to-coral-400 text-white shadow-soft">
               <Sparkles aria-hidden="true" className="size-[18px]" strokeWidth={2.4} />
             </span>
             <span className={collapsed ? "hidden" : ""}>
-              <span className="block text-[17px] font-semibold tracking-[-0.02em]">Plume</span>
-              <span className="block text-[10px] font-800 uppercase tracking-[0.16em] text-sky-200/70">Design workspace</span>
+              <span className="block text-[17px] font-semibold tracking-[-0.02em]">Bit-Barber</span>
+              <span className="block text-[10px] font-800 uppercase tracking-[0.16em] text-sky-200/70">Shop system</span>
             </span>
           </a>
           <button
@@ -165,7 +165,7 @@ function Sidebar({
               role="menu"
             >
               <p className="px-2.5 pb-1.5 pt-1 text-[9px] font-bold uppercase tracking-[0.14em] text-white/30">Your workspaces</p>
-              {["Plume Studio", "Northside CRM", "Training Space"].map((workspaceName) => (
+              {["Bole Fade House", "Piassa Lineup", "Merkato Kings"].map((workspaceName) => (
                 <button
                   className="flex w-full items-center gap-2.5 rounded-lg px-2 py-2 text-left text-xs text-white/65 hover:bg-white/[0.07] hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-400"
                   key={workspaceName}
@@ -251,18 +251,18 @@ function Sidebar({
           </button>
 
           <button
-            aria-label="Open account menu for Sam Okoro, Owner"
+            aria-label="Open account menu for Dawit Bekele, Owner"
             className={`flex w-full items-center gap-3 rounded-xl border border-white/[0.08] bg-white/[0.04] p-2 text-left transition hover:bg-white/[0.08] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-400 ${collapsed ? "justify-center border-transparent bg-transparent p-1" : ""}`}
-            title={collapsed ? "Sam Okoro · Owner" : undefined}
+            title={collapsed ? "Dawit Bekele · Owner" : undefined}
             type="button"
           >
-            <span className="grid size-9 shrink-0 place-items-center rounded-xl bg-sky-400/15 text-xs font-bold text-sky-300">SO</span>
+            <span className="grid size-9 shrink-0 place-items-center rounded-xl bg-sky-400/15 text-xs font-bold text-sky-300">DB</span>
             <span className={`min-w-0 flex-1 ${collapsed ? "hidden" : ""}`}>
               <span className="flex items-center gap-2">
-                <span className="truncate text-sm font-medium text-white">Sam Okoro</span>
+                <span className="truncate text-sm font-medium text-white">Dawit Bekele</span>
                 <span className="rounded-md bg-sky-400/12 px-1.5 py-0.5 text-[9px] font-bold uppercase tracking-wide text-sky-300">Owner</span>
               </span>
-              <span className="block truncate text-[11px] text-white/40">sam@plume.studio</span>
+              <span className="block truncate text-[11px] text-white/40">dawit@bolefade.et</span>
             </span>
             <ChevronDown aria-hidden="true" className={`size-4 shrink-0 text-white/35 ${collapsed ? "hidden" : ""}`} />
           </button>
@@ -498,10 +498,10 @@ function DashboardHeader({ openCommand }: { openCommand: () => void }) {
         </button>
         <div className="hidden h-8 w-px bg-slate-200 dark:bg-white/10 sm:block" />
         <button className="flex items-center gap-2.5 rounded-xl p-1 pr-2 text-left transition hover:bg-slate-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-600 dark:hover:bg-white/[0.06]" type="button" aria-label="Open user menu">
-          <span className="grid size-9 place-items-center rounded-xl bg-slate-900 text-xs font-semibold text-white dark:bg-sky-400 dark:text-ink-900">SO</span>
+          <span className="grid size-9 place-items-center rounded-xl bg-slate-900 text-xs font-semibold text-white dark:bg-sky-400 dark:text-ink-900">DB</span>
           <span className="hidden sm:block">
-            <span className="flex items-center gap-1.5 text-sm font-semibold leading-4 text-slate-800 dark:text-white">Sam Okoro <span className="rounded bg-sky-100 px-1.5 py-0.5 text-[8px] font-bold uppercase tracking-wide text-sky-700 dark:bg-sky-400/15 dark:text-sky-300">Owner</span></span>
-            <span className="block text-[11px] leading-4 text-slate-400 dark:text-white/35">Analytics workspace</span>
+            <span className="flex items-center gap-1.5 text-sm font-semibold leading-4 text-slate-800 dark:text-white">Dawit Bekele <span className="rounded bg-sky-100 px-1.5 py-0.5 text-[8px] font-bold uppercase tracking-wide text-sky-700 dark:bg-sky-400/15 dark:text-sky-300">Owner</span></span>
+            <span className="block text-[11px] leading-4 text-slate-400 dark:text-white/35">Bole Fade House</span>
           </span>
           <ChevronDown aria-hidden="true" className="hidden size-4 text-slate-400 sm:block" />
         </button>
@@ -582,8 +582,8 @@ export function DashboardShell({ children }: { children?: ReactNode }) {
               <p className="mb-1 flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.12em] text-sky-700">
                 <span className="size-1.5 rounded-full bg-sky-500" /> Thursday, September 3
               </p>
-              <h1 className="text-2xl font-semibold tracking-[-0.035em] text-slate-950 dark:text-white sm:text-[30px]">Good morning, Sam</h1>
-              <p className="mt-1 text-sm text-slate-500 dark:text-white/45">Here&apos;s how your shop is looking today.</p>
+              <h1 className="text-2xl font-semibold tracking-[-0.035em] text-slate-950 dark:text-white sm:text-[30px]">Good morning, Dawit</h1>
+              <p className="mt-1 text-sm text-slate-500 dark:text-white/45">Here is how Bole Fade House is looking today.</p>
             </div>
             <button className="inline-flex h-11 items-center justify-center gap-2 rounded-full bg-gradient-to-r from-sky-700 to-coral-600 px-4 text-sm font-900 text-white shadow-soft transition hover:opacity-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-400" type="button">
               <Plus aria-hidden="true" className="size-[17px]" strokeWidth={2.2} /> New appointment
@@ -592,7 +592,7 @@ export function DashboardShell({ children }: { children?: ReactNode }) {
 
           <section aria-label="Business overview" className="grid grid-cols-12 gap-4 lg:gap-5">
             <MetricCard label="Today's appointments" value="12" change="18.2%" direction="up" icon={CalendarDays} />
-            <MetricCard label="Expected revenue" value="$1,240" change="9.4%" direction="up" icon={CircleDollarSign} />
+            <MetricCard label="Expected till" value="18,400 ETB" change="9.4%" direction="up" icon={CircleDollarSign} />
             <MetricCard label="Active customers" value="846" change="6.1%" direction="up" icon={UsersRound} />
             <MetricCard label="Average service time" value="42m" change="3.5%" direction="down" icon={Clock3} />
 
@@ -649,16 +649,16 @@ export function DashboardShell({ children }: { children?: ReactNode }) {
               <div className="flex items-center justify-between">
                 <div>
                   <p className="text-[10px] font-semibold uppercase tracking-[0.16em] text-sky-300">Next up</p>
-                  <h2 className="mt-1 text-lg font-semibold tracking-[-0.02em]" id="next-up-title">Marcus Lee</h2>
+                  <h2 className="mt-1 text-lg font-semibold tracking-[-0.02em]" id="next-up-title">Dawit Mekonnen</h2>
                 </div>
                 <span className="rounded-lg bg-white/[0.07] px-2.5 py-1 text-xs font-medium text-white/65">in 12 min</span>
               </div>
               <div className="my-5 h-px bg-white/[0.08]" />
               <div className="flex items-center gap-3">
-                <span className="grid size-11 place-items-center rounded-xl bg-sky-400 text-sm font-bold text-ink-900">ML</span>
+                <span className="grid size-11 place-items-center rounded-xl bg-sky-400 text-sm font-bold text-ink-900">DM</span>
                 <div>
                   <p className="text-sm font-medium">Skin fade + beard</p>
-                  <p className="mt-0.5 text-xs text-white/45">09:00–09:55 · with James</p>
+                  <p className="mt-0.5 text-xs text-white/45">09:00–09:55 · with Yonas</p>
                 </div>
               </div>
               <div className="mt-5 grid grid-cols-2 gap-2">

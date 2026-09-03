@@ -86,6 +86,7 @@ input {
   --color-coral-400: #fb7185;
   --color-coral-500: #f43f5e;
   --color-coral-600: #e11d48;
+  --color-gold-400: #f4c430;
   --shadow-soft: 0 24px 60px -22px rgba(56, 189, 248, 0.45);
   --shadow-card: 0 40px 90px -30px rgba(15, 32, 48, 0.3);
   --shadow-lift: 0 28px 50px -24px rgba(14, 165, 233, 0.28);
@@ -296,9 +297,58 @@ input {
   animation-delay: 0.8s;
 }
 
+.plume .promo-marquee {
+  animation: bitbarber-marquee 28s linear infinite;
+}
+
+.plume .sticker-float {
+  animation: bitbarber-sticker 7s ease-in-out infinite;
+}
+
+.plume .sticker-float-slow {
+  animation: bitbarber-sticker 9s ease-in-out infinite reverse;
+}
+
+.plume .promo-pulse {
+  animation: bitbarber-pulse 2.4s ease-in-out infinite;
+}
+
+@keyframes bitbarber-marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@keyframes bitbarber-sticker {
+  0%,
+  100% {
+    transform: translateY(0) rotate(-8deg);
+  }
+  50% {
+    transform: translateY(-12px) rotate(6deg);
+  }
+}
+
+@keyframes bitbarber-pulse {
+  0%,
+  100% {
+    box-shadow: 0 0 0 0 rgba(244, 196, 48, 0.45);
+  }
+  50% {
+    box-shadow: 0 0 0 10px rgba(244, 196, 48, 0);
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .plume .ghost-blob,
-  .plume .prompt-card {
+  .plume .prompt-card,
+  .plume .promo-marquee,
+  .plume .sticker-float,
+  .plume .sticker-float-slow,
+  .plume .promo-pulse {
     animation: none !important;
   }
 }

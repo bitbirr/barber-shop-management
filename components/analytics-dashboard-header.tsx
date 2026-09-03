@@ -32,17 +32,17 @@ export function AnalyticsDashboardHeader() {
   function exportCsv() {
     const csv = [
       ["Metric", "Value", "Change"],
-      ["Monthly revenue", "$28,400", "+12.8%"],
+      ["Monthly till", "428,000 ETB", "+12.8%"],
       ["Chair utilization", "78%", "+4.2%"],
       ["Repeat rate", "64%", "+7.1%"],
-      ["Average ticket", "$52", "+3.8%"],
+      ["Average ticket", "850 ETB", "+3.8%"],
     ]
       .map((row) => row.map((cell) => `"${cell.replaceAll('"', '""')}"`).join(","))
       .join("\n");
     const url = URL.createObjectURL(new Blob([csv], { type: "text/csv;charset=utf-8" }));
     const anchor = document.createElement("a");
     anchor.href = url;
-    anchor.download = "plume-analytics.csv";
+    anchor.download = "bit-barber-analytics.csv";
     anchor.click();
     URL.revokeObjectURL(url);
   }
@@ -125,7 +125,7 @@ export function AnalyticsDashboardHeader() {
                   <span className="grid size-8 place-items-center rounded-lg bg-slate-100 text-slate-500 dark:bg-white/[0.07] dark:text-white/50">{copied ? <Check aria-hidden="true" className="size-4 text-sky-600" /> : <Copy aria-hidden="true" className="size-4" />}</span>
                   <span>{copied ? "Link copied" : "Copy share link"}</span>
                 </button>
-                <a className="flex items-center gap-3 rounded-xl px-2.5 py-2.5 text-sm font-medium text-slate-700 transition hover:bg-slate-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-500 dark:text-white/70 dark:hover:bg-white/[0.06]" href="mailto:?subject=Plume analytics report" role="menuitem">
+                <a className="flex items-center gap-3 rounded-xl px-2.5 py-2.5 text-left text-sm font-medium text-slate-700 transition hover:bg-slate-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-500 dark:text-white/70 dark:hover:bg-white/[0.06]" href="mailto:?subject=Bit-Barber analytics report" role="menuitem">
                   <span className="grid size-8 place-items-center rounded-lg bg-slate-100 text-slate-500 dark:bg-white/[0.07] dark:text-white/50"><Mail aria-hidden="true" className="size-4" /></span>
                   Send by email
                 </a>

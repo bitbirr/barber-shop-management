@@ -6,11 +6,30 @@ import { organization } from "better-auth/plugins/organization";
 import { prisma } from "@/lib/db";
 import { sendTemplateEmail } from "@/lib/email/send";
 import { RESEND_TEMPLATES } from "@/lib/email/templates";
+import { allowedAuthHosts, defaultTrustedOrigins } from "@/lib/auth-origins";
 
 const appUrl = process.env.BETTER_AUTH_URL ?? "http://localhost:3000";
+const cookieDomain = process.env.AUTH_COOKIE_DOMAIN?.trim() || (appUrl.includes("bitbirr.net") ? ".bitbirr.net" : undefined);
 
 export const auth = betterAuth({
-  appName: "Barber Shop Management",
+  appName: "Bit-Barber System",
+  baseURL: {
+    allowedHosts: allowedAuthHosts(),
+    fallback: appUrl,
+    protocol: "auto",
+  },
+  trustedOrigins: defaultTrustedOrigins(),
+  advanced: {
+    trustedProxyHeaders: true,
+    ...(cookieDomain
+      ? {
+          crossSubDomainCookies: {
+            enabled: true,
+            domain: cookieDomain,
+          },
+        }
+      : {}),
+  },
   database: prismaAdapter(prisma, { provider: "postgresql" }),
   emailAndPassword: {
     enabled: true,

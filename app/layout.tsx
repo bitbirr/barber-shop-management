@@ -19,8 +19,8 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "Plume workspace",
-  description: "Barber shop appointments and operations dashboard",
+  title: "Bit-Barber System",
+  description: "All-in-one SaaS for Ethiopian barber shops to run chairs, bookings, and the till.",
 };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {

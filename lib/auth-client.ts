@@ -4,6 +4,9 @@ import { organizationClient } from "better-auth/client/plugins";
 
 export const authClient = createAuthClient({
   plugins: [adminClient(), organizationClient()],
+  fetchOptions: {
+    credentials: "include",
+  },
 });
 
 export const {

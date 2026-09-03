@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Account. Plume",
+  title: "Account | Bit-Barber System",
 };
 
 export default function AuthLayout({ children }: { children: React.ReactNode }) {
