@@ -11,12 +11,26 @@ import { defaultTrustedOrigins } from "@/lib/auth-origins";
 const appUrl = process.env.BETTER_AUTH_URL ?? "http://localhost:3000";
 const cookieDomain = process.env.AUTH_COOKIE_DOMAIN?.trim() || undefined;
 
+async function safeSendTemplateEmail(
+  args: Parameters<typeof sendTemplateEmail>[0],
+  label: string,
+) {
+  try {
+    await sendTemplateEmail(args);
+  } catch (error) {
+    console.error(`[auth] ${label} email failed`, error);
+  }
+}
+
 export const auth = betterAuth({
   appName: "Bit-Barber System",
   baseURL: appUrl,
   trustedOrigins: defaultTrustedOrigins(),
   advanced: {
     trustedProxyHeaders: true,
+    ipAddress: {
+      ipAddressHeaders: ["cf-connecting-ip", "x-forwarded-for", "x-real-ip"],
+    },
     ...(cookieDomain
       ? {
           crossSubDomainCookies: {
@@ -33,60 +47,72 @@ export const auth = betterAuth({
     minPasswordLength: 12,
     revokeSessionsOnPasswordReset: true,
     sendResetPassword: async ({ user, url }) => {
-      void sendTemplateEmail({
-        to: user.email,
-        template: RESEND_TEMPLATES.resetPassword,
-        variables: {
-          USER_NAME: user.name || "there",
-          ACTION_URL: url,
-          APP_NAME: "Barber Shop Management",
+      await safeSendTemplateEmail(
+        {
+          to: user.email,
+          template: RESEND_TEMPLATES.resetPassword,
+          variables: {
+            USER_NAME: user.name || "there",
+            ACTION_URL: url,
+            APP_NAME: "Bit-Barber System",
+          },
+          idempotencyKey: `reset-password/${user.id}/${Date.now()}`,
         },
-        idempotencyKey: `reset-password/${user.id}/${Date.now()}`,
-      });
+        "reset password",
+      );
     },
     onPasswordReset: async ({ user }) => {
-      void sendTemplateEmail({
-        to: user.email,
-        template: RESEND_TEMPLATES.passwordChanged,
-        variables: {
-          USER_NAME: user.name || "there",
-          APP_NAME: "Barber Shop Management",
-          SUPPORT_EMAIL: "info@bitbirr.net",
+      await safeSendTemplateEmail(
+        {
+          to: user.email,
+          template: RESEND_TEMPLATES.passwordChanged,
+          variables: {
+            USER_NAME: user.name || "there",
+            APP_NAME: "Bit-Barber System",
+            SUPPORT_EMAIL: "info@bitbirr.net",
+          },
+          idempotencyKey: `password-changed/${user.id}/${Date.now()}`,
         },
-        idempotencyKey: `password-changed/${user.id}/${Date.now()}`,
-      });
+        "password changed",
+      );
     },
   },
   emailVerification: {
     sendOnSignUp: true,
     autoSignInAfterVerification: true,
     sendVerificationEmail: async ({ user, url }) => {
-      void sendTemplateEmail({
-        to: user.email,
-        template: RESEND_TEMPLATES.verifyEmail,
-        variables: {
-          USER_NAME: user.name || "there",
-          ACTION_URL: url,
-          APP_NAME: "Barber Shop Management",
+      await safeSendTemplateEmail(
+        {
+          to: user.email,
+          template: RESEND_TEMPLATES.verifyEmail,
+          variables: {
+            USER_NAME: user.name || "there",
+            ACTION_URL: url,
+            APP_NAME: "Bit-Barber System",
+          },
+          idempotencyKey: `verify-email/${user.id}/${Date.now()}`,
         },
-        idempotencyKey: `verify-email/${user.id}/${Date.now()}`,
-      });
+        "verify",
+      );
     },
   },
   databaseHooks: {
     user: {
       create: {
         after: async (user) => {
-          void sendTemplateEmail({
-            to: user.email,
-            template: RESEND_TEMPLATES.welcome,
-            variables: {
-              USER_NAME: user.name || "there",
-              APP_NAME: "Barber Shop Management",
-              DASHBOARD_URL: `${appUrl}/dashboard`,
+          await safeSendTemplateEmail(
+            {
+              to: user.email,
+              template: RESEND_TEMPLATES.welcome,
+              variables: {
+                USER_NAME: user.name || "there",
+                APP_NAME: "Bit-Barber System",
+                DASHBOARD_URL: `${appUrl}/dashboard`,
+              },
+              idempotencyKey: `welcome/${user.id}`,
             },
-            idempotencyKey: `welcome/${user.id}`,
-          });
+            "welcome",
+          );
         },
       },
     },
@@ -126,18 +152,21 @@ export const auth = betterAuth({
       },
       async sendInvitationEmail(data) {
         const inviteUrl = `${appUrl}/accept-invite?invitationId=${data.invitation.id}`;
-        await sendTemplateEmail({
-          to: data.email,
-          template: RESEND_TEMPLATES.orgInvitation,
-          variables: {
-            INVITER_NAME: data.inviter.user.name || "A teammate",
-            ORGANIZATION_NAME: data.organization.name,
-            ROLE: String(data.invitation.role || "member"),
-            ACTION_URL: inviteUrl,
-            APP_NAME: "Barber Shop Management",
+        await safeSendTemplateEmail(
+          {
+            to: data.email,
+            template: RESEND_TEMPLATES.orgInvitation,
+            variables: {
+              INVITER_NAME: data.inviter.user.name || "A teammate",
+              ORGANIZATION_NAME: data.organization.name,
+              ROLE: String(data.invitation.role || "member"),
+              ACTION_URL: inviteUrl,
+              APP_NAME: "Bit-Barber System",
+            },
+            idempotencyKey: `org-invite/${data.invitation.id}`,
           },
-          idempotencyKey: `org-invite/${data.invitation.id}`,
-        });
+          "org invitation",
+        );
       },
     }),
     nextCookies(),
