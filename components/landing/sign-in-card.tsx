@@ -22,7 +22,7 @@ export function SignInCard() {
     const { error: signInError } = await authClient.signIn.email({
       email: String(form.get("email") || ""),
       password: String(form.get("password") || ""),
-      callbackURL: next,
+      callbackURL: next.startsWith("http") ? next : `${window.location.origin}${next.startsWith("/") ? next : `/${next}`}`,
     });
     setPending(false);
     if (signInError) {

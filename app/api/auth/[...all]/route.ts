@@ -13,12 +13,31 @@ function withCors(response: Response, request: Request) {
   return response;
 }
 
+function fail(request: Request, error: unknown) {
+  console.error("[auth]", error);
+  return withCors(
+    Response.json(
+      { code: "INTERNAL_ERROR", message: "Could not complete this request. Check server logs." },
+      { status: 500 },
+    ),
+    request,
+  );
+}
+
 export async function GET(request: Request) {
-  return withCors(await handleGet(request), request);
+  try {
+    return withCors(await handleGet(request), request);
+  } catch (error) {
+    return fail(request, error);
+  }
 }
 
 export async function POST(request: Request) {
-  return withCors(await handlePost(request), request);
+  try {
+    return withCors(await handlePost(request), request);
+  } catch (error) {
+    return fail(request, error);
+  }
 }
 
 export function OPTIONS(request: Request) {

@@ -6,16 +6,20 @@ const nextConfig: NextConfig = {
     root: process.cwd(),
   },
   async headers() {
+    const pageHeaders = [
+      { key: "Referrer-Policy", value: "origin" },
+      { key: "Cache-Control", value: "private, no-store, no-transform" },
+    ];
     return [
-      {
-        source: "/:path*",
-        headers: [
-          {
-            key: "Referrer-Policy",
-            value: "strict-origin-when-cross-origin",
-          },
-        ],
-      },
+      { source: "/", headers: pageHeaders },
+      { source: "/signup", headers: pageHeaders },
+      { source: "/login", headers: pageHeaders },
+      { source: "/forgot-password", headers: pageHeaders },
+      { source: "/reset-password", headers: pageHeaders },
+      { source: "/verify-email", headers: pageHeaders },
+      { source: "/accept-invite", headers: pageHeaders },
+      { source: "/dashboard", headers: pageHeaders },
+      { source: "/dashboard/:path*", headers: pageHeaders },
     ];
   },
 };

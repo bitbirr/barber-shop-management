@@ -6,18 +6,14 @@ import { organization } from "better-auth/plugins/organization";
 import { prisma } from "@/lib/db";
 import { sendTemplateEmail } from "@/lib/email/send";
 import { RESEND_TEMPLATES } from "@/lib/email/templates";
-import { allowedAuthHosts, defaultTrustedOrigins } from "@/lib/auth-origins";
+import { defaultTrustedOrigins } from "@/lib/auth-origins";
 
 const appUrl = process.env.BETTER_AUTH_URL ?? "http://localhost:3000";
-const cookieDomain = process.env.AUTH_COOKIE_DOMAIN?.trim() || (appUrl.includes("bitbirr.net") ? ".bitbirr.net" : undefined);
+const cookieDomain = process.env.AUTH_COOKIE_DOMAIN?.trim() || undefined;
 
 export const auth = betterAuth({
   appName: "Bit-Barber System",
-  baseURL: {
-    allowedHosts: allowedAuthHosts(),
-    fallback: appUrl,
-    protocol: "auto",
-  },
+  baseURL: appUrl,
   trustedOrigins: defaultTrustedOrigins(),
   advanced: {
     trustedProxyHeaders: true,
@@ -25,7 +21,7 @@ export const auth = betterAuth({
       ? {
           crossSubDomainCookies: {
             enabled: true,
-            domain: cookieDomain,
+            domain: cookieDomain.startsWith(".") ? cookieDomain : `.${cookieDomain}`,
           },
         }
       : {}),
