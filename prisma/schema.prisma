@@ -24,6 +24,8 @@ model User {
   members       Member[]
   invitations   Invitation[]
   teamMembers   TeamMember[]
+  activities    Activity[]
+  subscriptions Subscription[]
 
   @@unique([email])
   @@map("user")
@@ -83,15 +85,18 @@ model Verification {
 }
 
 model Organization {
-  id          String       @id
-  name        String
-  slug        String
-  logo        String?
-  createdAt   DateTime     @default(now())
-  metadata    String?
-  members     Member[]
-  invitations Invitation[]
-  teams       Team[]
+  id            String         @id
+  name          String
+  slug          String
+  logo          String?
+  createdAt     DateTime       @default(now())
+  metadata      String?
+  members       Member[]
+  invitations   Invitation[]
+  teams         Team[]
+  activities    Activity[]
+  apiKeys       ApiKey[]
+  subscriptions Subscription[]
 
   @@unique([slug])
   @@map("organization")
@@ -153,4 +158,82 @@ model TeamMember {
   @@index([teamId])
   @@index([userId])
   @@map("teamMember")
+}
+
+/// Workspace activity feed — scoped by Better Auth active organization when present.
+model Activity {
+  id             String        @id @default(cuid())
+  organizationId String?
+  organization   Organization? @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  actorUserId    String?
+  actor          User?         @relation(fields: [actorUserId], references: [id], onDelete: SetNull)
+  actorName      String
+  actorImage     String?
+  /// comment | update | alert
+  type           String
+  action         String
+  resourceType   String?
+  resourceId     String?
+  resourceLabel  String?
+  resourceHref   String?
+  /// JSON blob for expandable event details
+  details        String?
+  createdAt      DateTime      @default(now())
+
+  @@index([organizationId, createdAt])
+  @@index([type, createdAt])
+  @@index([actorUserId])
+  @@index([createdAt])
+  @@map("activity")
+}
+
+/// Workspace API keys — plaintext shown only once on create/regenerate.
+model ApiKey {
+  id             String        @id @default(cuid())
+  organizationId String?
+  organization   Organization? @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  name           String        @default("Default")
+  keyPrefix      String
+  keyHash        String
+  lastFour       String
+  createdAt      DateTime      @default(now())
+  updatedAt      DateTime      @updatedAt
+  lastUsedAt     DateTime?
+  createdById    String?
+
+  @@unique([keyHash])
+  @@index([organizationId])
+  @@index([createdById])
+  @@map("apiKey")
+}
+
+/// Customer subscriptions managed in the SaaS console (org-scoped).
+model Subscription {
+  id              String        @id @default(cuid())
+  organizationId  String?
+  organization    Organization? @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  customerUserId  String?
+  customer        User?         @relation(fields: [customerUserId], references: [id], onDelete: SetNull)
+  customerName    String
+  customerEmail   String?
+  /// starter | pro | enterprise
+  plan            String
+  /// monthly | annual
+  billingCycle    String
+  /// active | paused | canceled
+  status          String        @default("active")
+  /// Monthly recurring revenue in major currency units
+  mrr             Int
+  nextInvoiceAt   DateTime
+  /// Denormalized last login; refreshed from Better Auth sessions when linked
+  lastLoginAt     DateTime?
+  createdAt       DateTime      @default(now())
+  updatedAt       DateTime      @updatedAt
+
+  @@index([organizationId, mrr])
+  @@index([plan])
+  @@index([status])
+  @@index([customerUserId])
+  @@index([nextInvoiceAt])
+  @@map("subscription")
 }

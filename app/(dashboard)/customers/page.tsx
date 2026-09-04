@@ -1,3 +1,4 @@
+import { CustomerDataTable } from "@/components/customer-data-table";
 import { SaaSPage } from "@/components/saas-page";
 
 export default function CustomersPage() {
@@ -7,12 +8,7 @@ export default function CustomersPage() {
       title="Client book"
       description="Track who comes back, who is overdue, and who spends in ETB."
       action="Add client"
-      metrics={[
-        { label: "Total regulars", value: "846", change: "6.1%" },
-        { label: "New this month", value: "72", change: "14.0%" },
-        { label: "Returning", value: "64%", change: "7.1%" },
-        { label: "Overdue 90 days", value: "28", change: "2.4%" },
-      ]}
+      kpiCards={<CustomerDataTable />}
       panelTitle="Addis segments"
       panelDescription="Groups that need a WhatsApp nudge"
       rows={[

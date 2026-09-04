@@ -1,4 +1,13 @@
 import { AnalyticsDashboardHeader } from "@/components/analytics-dashboard-header";
+import { AnalyticsKpiCards } from "@/components/analytics-kpi-cards";
+import { ConversionFunnelChart } from "@/components/conversion-funnel-chart";
+import { CustomerGrowthAreaChart } from "@/components/customer-growth-area-chart";
+import { CustomerHealthScoreSection } from "@/components/customer-health-score-section";
+import { FeatureUsageBarChart } from "@/components/feature-usage-bar-chart";
+import { PlanDistributionDonut } from "@/components/plan-distribution-donut";
+import { RealtimeMetricCards } from "@/components/realtime-metric-cards";
+import { RevenueAnalyticsSection } from "@/components/revenue-analytics-section";
+import { RevenueLineChart } from "@/components/revenue-line-chart";
 import { SaaSPage } from "@/components/saas-page";
 
 export default function AnalyticsPage() {
@@ -9,12 +18,33 @@ export default function AnalyticsPage() {
       title="Floor analytics"
       description="Till in ETB, chair fill, service mix, and who is coming back."
       action="Export report"
-      metrics={[
-        { label: "Monthly till", value: "428k ETB", change: "12.8%" },
-        { label: "Chair utilization", value: "78%", change: "4.2%" },
-        { label: "Repeat rate", value: "64%", change: "7.1%" },
-        { label: "Average ticket", value: "850 ETB", change: "3.8%" },
-      ]}
+      kpiCards={
+        <>
+          <RealtimeMetricCards />
+          <AnalyticsKpiCards />
+        </>
+      }
+      chart={
+        <div className="grid grid-cols-1 gap-4 xl:grid-cols-3 xl:gap-5">
+          <div className="xl:col-span-3">
+            <RevenueAnalyticsSection />
+          </div>
+          <div className="xl:col-span-2">
+            <RevenueLineChart />
+          </div>
+          <PlanDistributionDonut />
+          <div className="xl:col-span-2">
+            <CustomerGrowthAreaChart />
+          </div>
+          <FeatureUsageBarChart />
+          <div className="xl:col-span-3">
+            <ConversionFunnelChart />
+          </div>
+          <div className="xl:col-span-3">
+            <CustomerHealthScoreSection />
+          </div>
+        </div>
+      }
       panelTitle="Top-performing services"
       panelDescription="Ranked by till over the last 30 days"
       rows={[
