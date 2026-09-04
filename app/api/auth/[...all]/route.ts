@@ -1,6 +1,7 @@
 import { auth } from "../../../../lib/auth";
 import { toNextJsHandler } from "better-auth/next-js";
 import { corsHeadersForOrigin } from "@/lib/auth-origins";
+import { prisma } from "@/lib/db";
 
 const { GET: handleGet, POST: handlePost } = toNextJsHandler(auth.handler);
 
@@ -18,14 +19,16 @@ function withCors(response: Response, request: Request) {
   });
 }
 
-function fail(request: Request, error: unknown) {
-  console.error("[auth]", error);
+function classifyDbError(error: unknown) {
   const message = error instanceof Error ? error.message : String(error);
-  const code = /credentials|Authentication failed|P1000/i.test(message)
-    ? "DB_AUTH_FAILED"
-    : /Can't reach database server|P1001/i.test(message)
-      ? "DB_UNREACHABLE"
-      : "INTERNAL_ERROR";
+  if (/credentials|Authentication failed|P1000/i.test(message)) return "DB_AUTH_FAILED" as const;
+  if (/Can't reach database server|P1001/i.test(message)) return "DB_UNREACHABLE" as const;
+  return null;
+}
+
+function fail(request: Request, error: unknown, forcedCode?: "DB_AUTH_FAILED" | "DB_UNREACHABLE" | "INTERNAL_ERROR") {
+  console.error("[auth]", error);
+  const code = forcedCode ?? classifyDbError(error) ?? "INTERNAL_ERROR";
 
   return withCors(
     Response.json(
@@ -44,9 +47,27 @@ function fail(request: Request, error: unknown) {
   );
 }
 
+/** Better Auth often returns an empty 500 when Prisma init fails; probe DB to surface a clear code. */
+async function maybeRewriteEmptyDbFailure(request: Request, response: Response) {
+  if (response.status < 500) return withCors(response, request);
+
+  const text = await response.clone().text();
+  console.error("[auth] upstream 5xx", response.status, text || "(empty body)");
+
+  if (text) return withCors(response, request);
+
+  try {
+    await prisma.$queryRaw`SELECT 1`;
+    return withCors(response, request);
+  } catch (error) {
+    const code = classifyDbError(error) ?? "INTERNAL_ERROR";
+    return fail(request, error, code);
+  }
+}
+
 export async function GET(request: Request) {
   try {
-    return withCors(await handleGet(request), request);
+    return await maybeRewriteEmptyDbFailure(request, await handleGet(request));
   } catch (error) {
     return fail(request, error);
   }
@@ -54,12 +75,7 @@ export async function GET(request: Request) {
 
 export async function POST(request: Request) {
   try {
-    const response = await handlePost(request);
-    if (response.status >= 500) {
-      const text = await response.clone().text();
-      console.error("[auth] upstream 5xx", response.status, text || "(empty body)");
-    }
-    return withCors(response, request);
+    return await maybeRewriteEmptyDbFailure(request, await handlePost(request));
   } catch (error) {
     return fail(request, error);
   }

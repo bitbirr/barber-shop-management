@@ -1,7 +1,16 @@
 import { NextResponse, type NextRequest } from "next/server";
 import { auth } from "@/lib/auth";
 
-const publicExact = new Set(["/", "/login", "/signup", "/forgot-password", "/reset-password", "/verify-email", "/accept-invite"]);
+const publicExact = new Set([
+  "/",
+  "/login",
+  "/signup",
+  "/forgot-password",
+  "/reset-password",
+  "/verify-email",
+  "/accept-invite",
+  "/api/health",
+]);
 const publicPrefixes = ["/api/auth", "/book"];
 
 export async function middleware(request: NextRequest) {
