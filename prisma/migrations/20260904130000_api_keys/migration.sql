@@ -7,7 +7,7 @@ CREATE TABLE IF NOT EXISTS "apiKey" (
     "keyHash" TEXT NOT NULL,
     "lastFour" TEXT NOT NULL,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    "updatedAt" TIMESTAMP(3) NOT NULL,
+    "updatedAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "lastUsedAt" TIMESTAMP(3),
     "createdById" TEXT,
 

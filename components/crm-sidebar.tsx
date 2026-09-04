@@ -9,6 +9,7 @@ import {
   ChevronsLeft,
   ChevronsRight,
   ContactRound,
+  CreditCard,
   FileText,
   Handshake,
   Kanban,
@@ -36,6 +37,7 @@ export const navigationSections = [
       { label: "Contacts", icon: ContactRound, href: "/customers", badge: 3 },
       { label: "Deals", icon: Handshake, href: "/deals" },
       { label: "Invoices", icon: FileText, href: "/invoices" },
+      { label: "Subscriptions", icon: CreditCard, href: "/subscriptions" },
     ],
   },
   {

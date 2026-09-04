@@ -26,11 +26,12 @@ const pageTabs: Record<string, string[]> = {
   activity: ["All", "Comments", "Updates", "Alerts"],
   pipeline: ["Board", "Forecast", "Activity"],
   deals: ["All deals", "Open", "Won", "Lost"],
-  analytics: ["Overview", "Revenue", "Services", "Team performance"],
+  analytics: ["Overview", "Features", "Revenue", "Services", "Team performance"],
   customers: ["All customers", "Segments", "Retention"],
   settings: ["Profile", "Team", "Billing", "API Keys"],
   users: ["All users", "Invitations", "Roles"],
   invoices: ["All invoices", "Overdue", "Paid"],
+  subscriptions: ["All plans", "Starter", "Pro", "Enterprise"],
   billing: ["Subscription", "Usage", "Invoices", "Payment methods"],
 };
 
@@ -98,7 +99,9 @@ function MobileTabBar() {
 
 function DashboardHeader({ openCommand }: { openCommand: () => void }) {
   const pathname = usePathname();
-  const pageKey = pathname.split("/").filter(Boolean)[0] ?? "dashboard";
+  const segments = pathname.split("/").filter(Boolean);
+  const pageKey = segments[0] ?? "dashboard";
+  const isFeatureAnalytics = pageKey === "analytics" && segments[1] === "features";
   const pageTitle = navigation.find((item) => item.href === `/${pageKey}`)?.label ?? "Dashboard";
   const tabs = pageTabs[pageKey] ?? ["Overview"];
 
@@ -152,17 +155,28 @@ function DashboardHeader({ openCommand }: { openCommand: () => void }) {
         <div className="hidden h-5 w-px shrink-0 bg-slate-200 dark:bg-white/10 md:block xl:hidden" />
         <nav aria-label={`${pageTitle} sections`} className="min-w-0 flex-1 overflow-x-auto [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
           <ul className="flex h-11 min-w-max items-end gap-5">
-            {tabs.map((tab, index) => (
-              <li className="h-full" key={tab}>
-                <Link
-                  aria-current={index === 0 ? "page" : undefined}
-                  className={`relative flex h-full items-center whitespace-nowrap text-xs font-semibold transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-500 ${index === 0 ? "text-sky-700 after:absolute after:inset-x-0 after:bottom-0 after:h-0.5 after:rounded-full after:bg-sky-500 dark:text-sky-300" : "text-slate-400 hover:text-slate-700 dark:text-gray-400 dark:hover:text-gray-100"}`}
-                  href={`/${pageKey}${index === 0 ? "" : `#${tab.toLowerCase().replaceAll(" ", "-")}`}`}
-                >
-                  {tab}
-                </Link>
-              </li>
-            ))}
+            {tabs.map((tab, index) => {
+              const href =
+                pageKey === "analytics" && tab === "Features"
+                  ? "/analytics/features"
+                  : `/${pageKey}${index === 0 ? "" : `#${tab.toLowerCase().replaceAll(" ", "-")}`}`;
+              const active =
+                tab === "Features"
+                  ? isFeatureAnalytics
+                  : index === 0 && !isFeatureAnalytics;
+
+              return (
+                <li className="h-full" key={tab}>
+                  <Link
+                    aria-current={active ? "page" : undefined}
+                    className={`relative flex h-full items-center whitespace-nowrap text-xs font-semibold transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-500 ${active ? "text-sky-700 after:absolute after:inset-x-0 after:bottom-0 after:h-0.5 after:rounded-full after:bg-sky-500 dark:text-sky-300" : "text-slate-400 hover:text-slate-700 dark:text-gray-400 dark:hover:text-gray-100"}`}
+                    href={href}
+                  >
+                    {tab}
+                  </Link>
+                </li>
+              );
+            })}
           </ul>
         </nav>
       </div>

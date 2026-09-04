@@ -11,7 +11,9 @@
     "lint": "eslint .",
     "typecheck": "tsc --noEmit",
     "db:generate": "prisma generate",
-    "db:push-activity": "node scripts/push-activity-schema.mjs",
+    "db:push": "node scripts/db-push.mjs",
+    "db:migrate:apply": "node scripts/db-apply-migrations.mjs",
+    "db:push-activity": "node scripts/db-push.mjs",
     "auth:seed-admin": "node scripts/seed-super-admin.mjs"
   },
   "dependencies": {

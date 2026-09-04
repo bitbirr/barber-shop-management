@@ -3,6 +3,7 @@ import { AnalyticsKpiCards } from "@/components/analytics-kpi-cards";
 import { ConversionFunnelChart } from "@/components/conversion-funnel-chart";
 import { CustomerGrowthAreaChart } from "@/components/customer-growth-area-chart";
 import { CustomerHealthScoreSection } from "@/components/customer-health-score-section";
+import { FeatureAnalyticsDashboard } from "@/components/feature-analytics-dashboard";
 import { FeatureUsageBarChart } from "@/components/feature-usage-bar-chart";
 import { PlanDistributionDonut } from "@/components/plan-distribution-donut";
 import { RealtimeMetricCards } from "@/components/realtime-metric-cards";
@@ -26,6 +27,9 @@ export default function AnalyticsPage() {
       }
       chart={
         <div className="grid grid-cols-1 gap-4 xl:grid-cols-3 xl:gap-5">
+          <div className="xl:col-span-3">
+            <FeatureAnalyticsDashboard />
+          </div>
           <div className="xl:col-span-3">
             <RevenueAnalyticsSection />
           </div>
